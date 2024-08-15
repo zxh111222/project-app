@@ -34,7 +34,7 @@ public class DbStorage implements Storage {
                 ResultSet rs = checkStmt.executeQuery();
                 if (rs.next() && rs.getInt(1) > 0) {
                     // URL 已存在，跳过
-                    System.out.println("URL 已存在，跳过: " + result.getUrl());
+                    System.out.println("URL 已存在: " + result.getUrl() + "  ---跳过");
                     continue;
                 }
 

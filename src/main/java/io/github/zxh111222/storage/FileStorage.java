@@ -15,7 +15,7 @@ import java.util.*;
 public class FileStorage implements Storage {
     @Override
     public void save(List<CustomResult> information) throws IOException {
-        File file = new File("src/day20240729/phase_project/resources/storeInfo.properties");
+        File file = new File("src/main/java/io/github/zxh111222/resources/information.data");
         try {
             PrintWriter pw = new PrintWriter(new FileWriter(file));
             for (CustomResult cr : information) {
