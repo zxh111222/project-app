@@ -1,5 +1,9 @@
 package io.github.zxh111222.dto;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * @author XinhaoZheng
  * @version 1.0
@@ -9,14 +13,30 @@ package io.github.zxh111222.dto;
 public class CustomResult {
     private String title;
     private String url;
-    private String createdAt;
-    private String updatedAt;
+    private Date createdAt;
+    private Date updatedAt;
+
+    private static final SimpleDateFormat dateFormat_1 = new SimpleDateFormat("yyyy-MM-dd");
+    private static final SimpleDateFormat dateFormat_2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
     public CustomResult(String title, String url, String createdAt, String updatedAt) {
         this.title = title;
         this.url = url;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        try {
+            // 将字符串解析为 Date 对象
+            if (createdAt != null && !createdAt.isEmpty()) {
+                this.createdAt = dateFormat_1.parse(createdAt);
+            } else {
+                this.createdAt = null;
+            }
+            if (updatedAt != null && !updatedAt.isEmpty()) {
+                this.updatedAt = dateFormat_2.parse(updatedAt);
+            } else {
+                this.updatedAt = null;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace(); // 处理解析异常
+        }
     }
 
     public String getTitle() {
@@ -35,19 +55,19 @@ public class CustomResult {
         this.url = url;
     }
 
-    public String getCreatedAt() {
+    public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(String createdAt) {
+    public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public String getUpdatedAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
     }
 
