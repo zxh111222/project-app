@@ -44,6 +44,9 @@ CREATE TABLE `url_parse` (
     `url` VARCHAR(255) NOT NULL,
     `parser` VARCHAR(255) NOT NULL
 );
+ALTER TABLE `url_parse` ADD COLUMN `lastCrawlDate` TIMESTAMP NULL;
+
+
 
 INSERT INTO `url_parse` (`name`, `url`, `parser`)
 VALUES

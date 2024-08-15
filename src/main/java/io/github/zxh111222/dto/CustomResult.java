@@ -16,13 +16,15 @@ public class CustomResult {
     private Date createdAt;
     private Date updatedAt;
 
-    private static final SimpleDateFormat dateFormat_1 = new SimpleDateFormat("yyyy-MM-dd");
-    private static final SimpleDateFormat dateFormat_2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+    // private static final SimpleDateFormat dateFormat_1 = new SimpleDateFormat("yyyy-MM-dd");
+    // private static final SimpleDateFormat dateFormat_2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    public CustomResult(String title, String url, String createdAt, String updatedAt) {
+    public CustomResult(String title, String url, Date createdAt, Date updatedAt) {
         this.title = title;
         this.url = url;
-        try {
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        /*try {
             // 将字符串解析为 Date 对象
             if (createdAt != null && !createdAt.isEmpty()) {
                 this.createdAt = dateFormat_1.parse(createdAt);
@@ -36,7 +38,7 @@ public class CustomResult {
             }
         } catch (ParseException e) {
             e.printStackTrace(); // 处理解析异常
-        }
+        }*/
     }
 
     public String getTitle() {
