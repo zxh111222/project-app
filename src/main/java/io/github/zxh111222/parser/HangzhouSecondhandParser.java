@@ -2,6 +2,7 @@ package io.github.zxh111222.parser;
 
 import io.github.zxh111222.dto.CustomResult;
 import io.github.zxh111222.util.MyDBUtil;
+import io.github.zxh111222.util.MyDateConversionUtil;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,6 +26,8 @@ public class HangzhouSecondhandParser implements Parser {
         Date lastCrawlDate = getLastCrawlDateFromDB(); // 获取上次采集的最大时间
         Date newCrawlDate = lastCrawlDate; // 初始化为上次采集时间
 
+        System.out.println("本次从" + MyDateConversionUtil.formatDate(lastCrawlDate) + "时间点开始获取");
+
         for (Element element : elements) {
             String title = element.select("h4[class=hoverLine]").text();
             String url = element.select("a").attr("href");
@@ -35,7 +38,7 @@ public class HangzhouSecondhandParser implements Parser {
             createdAtStr = createdAtStr.substring(startIndex);
 
             // 将时间字符串转换为Date对象
-            Date createdAt = parseDate(createdAtStr);
+            Date createdAt = MyDateConversionUtil.parseDate(createdAtStr);
             Date updatedAt = null;
 
             // 时间过滤逻辑
@@ -61,22 +64,7 @@ public class HangzhouSecondhandParser implements Parser {
         return parserList;
     }
 
-    private Date parseDate(String dateString) {
-        try {
-            SimpleDateFormat dateFormat;
-            if (dateString.length() == 10) {
-                dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            } else if (dateString.length() == 16) {
-                dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            } else {
-                dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            }
-            return dateFormat.parse(dateString);
-        } catch (ParseException e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
+
 
     private Date getLastCrawlDateFromDB() {
         String getParserQuery = "SELECT parser FROM url_parse WHERE name = '杭州二手'";
@@ -111,9 +99,6 @@ public class HangzhouSecondhandParser implements Parser {
         }
         return new java.util.Date(java.sql.Date.valueOf("2024-01-01").getTime());
     }
-
-
-
 
 
     private void saveLastCrawlDateToDB(Date newCrawlDate) {
