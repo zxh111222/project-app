@@ -36,6 +36,7 @@ public class HangzhouSecondhandParser implements Parser {
 
             int startIndex = Math.max(0, createdAtStr.length() - 20);
             createdAtStr = createdAtStr.substring(startIndex);
+            String updatedAtStr = null;
 
             // 将时间字符串转换为Date对象
             Date createdAt = MyDateConversionUtil.parseDate(createdAtStr);
@@ -51,7 +52,7 @@ public class HangzhouSecondhandParser implements Parser {
                 newCrawlDate = createdAt;
             }
 
-            parserList.add(new CustomResult(title, url, createdAt, updatedAt));
+            parserList.add(new CustomResult(title, url, createdAtStr, updatedAtStr));
         }
 
         // 保存最新的抓取时间

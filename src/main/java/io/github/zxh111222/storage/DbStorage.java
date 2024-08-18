@@ -3,6 +3,7 @@ package io.github.zxh111222.storage;
 import io.github.zxh111222.dto.CustomResult;
 import io.github.zxh111222.storage.Storage;
 import io.github.zxh111222.util.MyDBUtil;
+import io.github.zxh111222.util.MyDateConversionUtil;
 
 import java.io.IOException;
 import java.sql.*;
@@ -42,13 +43,13 @@ public class DbStorage implements Storage {
                 insertStmt.setString(1, result.getTitle());
                 insertStmt.setString(2, result.getUrl());
                 if (result.getCreatedAt() != null) {
-                    insertStmt.setTimestamp(3, new Timestamp(result.getCreatedAt().getTime()));
+                    insertStmt.setTimestamp(3, new Timestamp(MyDateConversionUtil.parseDate(result.getCreatedAt()).getTime()));
                 } else {
                     insertStmt.setNull(3, Types.TIMESTAMP);
                 }
 
                 if (result.getUpdatedAt() != null) {
-                    insertStmt.setTimestamp(4, new Timestamp(result.getUpdatedAt().getTime()));
+                    insertStmt.setTimestamp(4, new Timestamp(MyDateConversionUtil.parseDate(result.getUpdatedAt()).getTime()));
                 } else {
                     insertStmt.setNull(4, Types.TIMESTAMP);
                 }

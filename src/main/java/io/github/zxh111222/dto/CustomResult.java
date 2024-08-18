@@ -1,7 +1,8 @@
 package io.github.zxh111222.dto;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import io.github.zxh111222.util.MyDateConversionUtil;
+import lombok.Setter;
+
 import java.util.Date;
 
 /**
@@ -11,15 +12,17 @@ import java.util.Date;
  * @date 2024/7/30 10:35
  */
 public class CustomResult {
+    @Setter
     private String title;
+    @Setter
     private String url;
-    private Date createdAt;
-    private Date updatedAt;
+    private String createdAt;
+    private String updatedAt;
 
     // private static final SimpleDateFormat dateFormat_1 = new SimpleDateFormat("yyyy-MM-dd");
     // private static final SimpleDateFormat dateFormat_2 = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 
-    public CustomResult(String title, String url, Date createdAt, Date updatedAt) {
+    public CustomResult(String title, String url, String createdAt, String updatedAt) {
         this.title = title;
         this.url = url;
         this.createdAt = createdAt;
@@ -45,32 +48,24 @@ public class CustomResult {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getUrl() {
         return url;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
     public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
+        this.createdAt = MyDateConversionUtil.formatDate(createdAt);
     }
 
-    public Date getUpdatedAt() {
+    public String getUpdatedAt() {
         return updatedAt;
     }
 
     public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+        this.updatedAt = MyDateConversionUtil.formatDate(updatedAt);
     }
 
     @Override

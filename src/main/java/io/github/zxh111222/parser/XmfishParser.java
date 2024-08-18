@@ -74,7 +74,7 @@ public class XmfishParser implements Parser {
                 newCrawlDate = updatedAt;
             }
 
-            parserList.add(new CustomResult(title, url, createdAt, updatedAt));
+            parserList.add(new CustomResult(title, url, createdAtStr, updatedAtStr));
         }
 
         // 保存最新的抓取时间
